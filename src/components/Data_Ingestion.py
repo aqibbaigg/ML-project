@@ -2,6 +2,9 @@ import os
 import sys
 from dataclasses import dataclass
 
+import pandas as pd
+from xgboost import data
+
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import read_sql_data
@@ -22,7 +25,7 @@ class Data_Ingestion:
 
     def initiate_data_ingestion(self):
         try:
-            df = read_sql_data()
+            df = pd.read_csv(os.path.join('notebook', 'data', 'raw.csv'))
 
             if df is None:
                 raise CustomException("Dataframe is None", sys)
